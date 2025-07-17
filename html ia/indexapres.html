@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Composant PriceCard Réutilisable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 2rem;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .price-card {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .price-title {
+            font-size: 1.7rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #222;
+        }
+
+        .price-amount {
+            font-size: 2.4rem;
+            color: #0077cc;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+
+        .features li {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .btn {
+            background-color: #0077cc;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #005fa3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        function PriceCard(title, price, features) {
+            const card = document.createElement('div');
+            card.className = 'price-card';
+
+            const h2 = document.createElement('div');
+            h2.className = 'price-title';
+            h2.textContent = title;
+
+            const amount = document.createElement('div');
+            amount.className = 'price-amount';
+            amount.textContent = price;
+
+            const ul = document.createElement('ul');
+            ul.className = 'features';
+            features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                ul.appendChild(li);
+            });
+
+            const btn = document.createElement('button');
+            btn.className = 'btn';
+            btn.textContent = 'S’abonner';
+            btn.addEventListener('click', () => {
+                alert(`Vous avez choisi le forfait ${title} à ${price}`);
+            });
+
+            card.appendChild(h2);
+            card.appendChild(amount);
+            card.appendChild(ul);
+            card.appendChild(btn);
+
+            return card;
+        }
+
+        const plans = [
+            { title: 'Basic', price: '€10/mois', features: ['1 utilisateur', '5GB de stockage', 'Support email'] },
+            { title: 'Pro', price: '€25/mois', features: ['5 utilisateurs', '50GB de stockage', 'Support prioritaire'] },
+            { title: 'Entreprise', price: '€50/mois', features: ['Illimité', '500GB de stockage', 'Support 24/7'] }
+        ];
+
+        plans.forEach(plan => {
+            document.body.appendChild(PriceCard(plan.title, plan.price, plan.features));
+        });
+    </script>
+
+</body>
+
+</html>
